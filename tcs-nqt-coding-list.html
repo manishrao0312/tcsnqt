@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TCS NQT 2026 — Coding Mastery List (Digital/Prime)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-card: #1a1a27;
+    --bg-card-hover: #22223a;
+    --bg-surface: #14141f;
+    --border: #2a2a3d;
+    --border-active: #4a4a6a;
+    --text-primary: #e8e8f0;
+    --text-secondary: #8888a8;
+    --text-muted: #5a5a78;
+    --accent-blue: #4d8bf5;
+    --accent-purple: #8b5cf6;
+    --accent-green: #22c55e;
+    --accent-orange: #f59e0b;
+    --accent-red: #ef4444;
+    --accent-cyan: #06b6d4;
+    --accent-pink: #ec4899;
+    --gradient-main: linear-gradient(135deg, #4d8bf5, #8b5cf6);
+    --gradient-green: linear-gradient(135deg, #22c55e, #06b6d4);
+    --gradient-orange: linear-gradient(135deg, #f59e0b, #ef4444);
+    --gradient-pink: linear-gradient(135deg, #ec4899, #8b5cf6);
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.5);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Ambient bg glow */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(77,139,245,0.08) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ─── HEADER ─── */
+  .hero {
+    position: relative;
+    padding: 48px 24px 36px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(77,139,245,0.06) 0%, transparent 100%);
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(77,139,245,0.12);
+    border: 1px solid rgba(77,139,245,0.25);
+    color: var(--accent-blue);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .hero-sub {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .stat-value {
+    font-weight: 700;
+    font-size: 18px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .stat-value.blue { color: var(--accent-blue); }
+  .stat-value.green { color: var(--accent-green); }
+  .stat-value.orange { color: var(--accent-orange); }
+  .stat-value.purple { color: var(--accent-purple); }
+
+  .progress-bar-wrap {
+    flex: 1;
+    max-width: 300px;
+    min-width: 150px;
+    height: 8px;
+    background: var(--bg-card);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gradient-main);
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    width: 0%;
+  }
+
+  /* ─── LEGEND ─── */
+  .legend {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    padding: 0 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+  .legend-dot.p0 { background: var(--accent-red); }
+  .legend-dot.med { background: var(--accent-orange); }
+  .legend-dot.easy { background: var(--accent-green); }
+  .legend-dot.hard { background: var(--accent-pink); }
+
+  /* ─── TIPS BANNER ─── */
+  .tips-banner {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 24px;
+  }
+  .tips-card {
+    background: linear-gradient(135deg, rgba(139,92,246,0.08), rgba(77,139,245,0.08));
+    border: 1px solid rgba(139,92,246,0.2);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+  .tips-card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .tip-icon { flex-shrink: 0; font-size: 14px; margin-top: 1px; }
+
+  /* ─── MAIN CONTENT ─── */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── SECTION ─── */
+  .topic-section {
+    margin-bottom: 36px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .section-icon.arr { background: rgba(77,139,245,0.15); }
+  .section-icon.str { background: rgba(139,92,246,0.15); }
+  .section-icon.num { background: rgba(34,197,94,0.15); }
+  .section-icon.sort { background: rgba(245,158,11,0.15); }
+  .section-icon.hash { background: rgba(6,182,212,0.15); }
+  .section-icon.sub { background: rgba(236,72,153,0.15); }
+  .section-icon.dp { background: rgba(239,68,68,0.15); }
+  .section-icon.mat { background: rgba(168,85,247,0.15); }
+  .section-icon.greedy { background: rgba(34,197,94,0.15); }
+  .section-icon.rec { background: rgba(245,158,11,0.15); }
+  .section-icon.misc { background: rgba(107,114,128,0.15); }
+  .section-icon.pat { background: rgba(236,72,153,0.15); }
+  .section-icon.tree { background: rgba(16,185,129,0.15); }
+  .section-icon.graph { background: rgba(99,102,241,0.15); }
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  .section-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .section-count {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--bg-card);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ─── QUESTION ROW ─── */
+  .q-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .q-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .q-row:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-active);
+    transform: translateX(4px);
+  }
+  .q-row.done {
+    opacity: 0.55;
+    background: rgba(34,197,94,0.04);
+    border-color: rgba(34,197,94,0.15);
+  }
+  .q-row.done .q-name {
+    text-decoration: line-through;
+    text-decoration-color: var(--accent-green);
+  }
+
+  .q-check {
+    width: 22px; height: 22px;
+    border: 2px solid var(--border-active);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-size: 13px;
+    color: transparent;
+  }
+  .q-row.done .q-check {
+    background: var(--accent-green);
+    border-color: var(--accent-green);
+    color: #fff;
+  }
+
+  .q-number {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .q-info { flex: 1; min-width: 0; }
+  .q-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .q-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .q-tags {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .tag.easy {
+    background: rgba(34,197,94,0.12);
+    color: var(--accent-green);
+    border: 1px solid rgba(34,197,94,0.2);
+  }
+  .tag.medium {
+    background: rgba(245,158,11,0.12);
+    color: var(--accent-orange);
+    border: 1px solid rgba(245,158,11,0.2);
+  }
+  .tag.hard {
+    background: rgba(239,68,68,0.12);
+    color: var(--accent-red);
+    border: 1px solid rgba(239,68,68,0.2);
+  }
+  .tag.must {
+    background: rgba(239,68,68,0.15);
+    color: var(--accent-red);
+    border: 1px solid rgba(239,68,68,0.3);
+    animation: pulse-must 2s infinite;
+  }
+  @keyframes pulse-must {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .tag.tcs {
+    background: rgba(77,139,245,0.12);
+    color: var(--accent-blue);
+    border: 1px solid rgba(77,139,245,0.2);
+  }
+  .tag.new {
+    background: rgba(236,72,153,0.15);
+    color: var(--accent-pink);
+    border: 1px solid rgba(236,72,153,0.3);
+    animation: pulse-new 1.5s infinite;
+  }
+  @keyframes pulse-new {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .q-link {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-decoration: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(77,139,245,0.08);
+    border: 1px solid rgba(77,139,245,0.15);
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .q-link:hover {
+    background: rgba(77,139,245,0.2);
+    border-color: rgba(77,139,245,0.4);
+  }
+  .q-link.gfg { color: var(--accent-green); background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.15); }
+  .q-link.gfg:hover { background: rgba(34,197,94,0.2); border-color: rgba(34,197,94,0.4); }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+  .footer-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .footer-quote {
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+  }
+
+  /* ─── RESET BTN ─── */
+  .reset-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 50;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .reset-btn:hover {
+    background: rgba(239,68,68,0.1);
+    border-color: rgba(239,68,68,0.3);
+    color: var(--accent-red);
+  }
+
+  /* ─── FILTER BAR ─── */
+  .filter-bar {
+    max-width: 1100px;
+    margin: 20px auto 0;
+    padding: 0 24px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .filter-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: rgba(77,139,245,0.12);
+    border-color: rgba(77,139,245,0.3);
+    color: var(--accent-blue);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 700px) {
+    .q-tags { display: none; }
+    .q-hint { display: none; }
+    .q-row { padding: 10px 12px; gap: 8px; }
+    .stats-bar { gap: 12px; padding: 10px 16px; }
+    .stat-item { font-size: 11px; }
+    .stat-value { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-badge">🎯 Curated for TCS NQT 2026 — FULL COVERAGE</div>
+  <h1>Coding Mastery List</h1>
+  <p>136 hand-picked questions with COMPLETE topic coverage. Solve these → Crack Digital/Prime. No gaps, no excuses.</p>
+  <div class="hero-sub">Arrays • Strings • Number Theory • Sorting • HashMap • Sliding Window • Matrix • Trees • Graphs • DP • Greedy • Recursion • Patterns</div>
+</div>
+
+<!-- ─── STATS BAR ─── -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat-item">
+    <span class="stat-value blue" id="totalCount">136</span>
+    <span>Total</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value green" id="doneCount">0</span>
+    <span>Done</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value orange" id="remainCount">136</span>
+    <span>Left</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-value purple" id="pctDone">0%</span>
+    <span>Progress</span>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<!-- ─── FILTER ─── -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterQuestions('all')">All</button>
+  <button class="filter-btn" onclick="filterQuestions('pending')">⬜ Pending</button>
+  <button class="filter-btn" onclick="filterQuestions('done')">✅ Done</button>
+  <button class="filter-btn" onclick="filterQuestions('must')">🔴 Must-Do</button>
+  <button class="filter-btn" onclick="filterQuestions('easy')">🟢 Easy</button>
+  <button class="filter-btn" onclick="filterQuestions('medium')">🟡 Medium</button>
+  <button class="filter-btn" onclick="filterQuestions('hard')">🔴 Hard</button>
+  <button class="filter-btn" onclick="filterQuestions('new')">🆕 Newly Added</button>
+</div>
+
+<!-- ─── TIPS ─── -->
+<div class="tips-banner">
+  <div class="tips-card">
+    <h3>⚡ How to use this list</h3>
+    <div class="tips-grid">
+      <div class="tip"><span class="tip-icon">1️⃣</span> Solve in order — topics are arranged by TCS frequency</div>
+      <div class="tip"><span class="tip-icon">2️⃣</span> 🔴 MUST-DO = appears in almost every TCS NQT slot</div>
+      <div class="tip"><span class="tip-icon">3️⃣</span> Click any row to mark it done — progress saves locally</div>
+      <div class="tip"><span class="tip-icon">4️⃣</span> Time yourself: 30 min Easy, 45 min Medium, 60 min Hard</div>
+      <div class="tip"><span class="tip-icon">5️⃣</span> Always handle edge cases: empty input, single element, all same</div>
+      <div class="tip"><span class="tip-icon">6️⃣</span> Target: finish all 🔴 MUST-DO first → then Medium → then Hard</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CONTENT ─── -->
+<div class="content" id="questionsContainer">
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 1: ARRAYS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="arrays">
+  <div class="section-header">
+    <div class="section-icon arr">📊</div>
+    <div>
+      <div class="section-title">Arrays</div>
+      <div class="section-meta">THE #1 topic in TCS NQT. Master this = half-battle won. "If arrays weak → forget Prime."</div>
+    </div>
+    <div class="section-count" id="count-arrays">0/23</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="1" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">01</div>
+      <div class="q-info"><div class="q-name">Find the Second Largest Element in an Array</div><div class="q-hint">Single pass, track two max values. Don't sort — O(n) required.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://www.geeksforgeeks.org/find-second-largest-element-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="2" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">02</div>
+      <div class="q-info"><div class="q-name">Reverse an Array</div><div class="q-hint">Two-pointer swap. Master both in-place and new-array methods.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/reverse-string/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="3" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">03</div>
+      <div class="q-info"><div class="q-name">Rotate Array by K Positions (Left/Right)</div><div class="q-hint">Reverse approach: reverse all → reverse first k → reverse rest. O(n).</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/rotate-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="4" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">04</div>
+      <div class="q-info"><div class="q-name">Move All Zeros to End</div><div class="q-hint">Two-pointer: one for non-zero write pos, one for traversal.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/move-zeroes/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="5" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">05</div>
+      <div class="q-info"><div class="q-name">Find Missing Number in Array (1 to N)</div><div class="q-hint">Sum formula: N*(N+1)/2 - sum(arr). Or XOR approach.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/missing-number/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="6" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">06</div>
+      <div class="q-info"><div class="q-name">Find Duplicate in Array</div><div class="q-hint">HashSet or Floyd's cycle detection. Know both methods.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/find-the-duplicate-number/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="7" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">07</div>
+      <div class="q-info"><div class="q-name">Two Sum — Find Pair with Given Sum</div><div class="q-hint">HashMap approach: for each num, check if (target-num) exists. O(n).</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/two-sum/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="8" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">08</div>
+      <div class="q-info"><div class="q-name">Sort Array of 0s, 1s, and 2s (Dutch National Flag)</div><div class="q-hint">Three-pointer: low, mid, high. Single pass O(n). TCS favourite!</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/sort-colors/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="9" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">09</div>
+      <div class="q-info"><div class="q-name">Maximum Subarray Sum (Kadane's Algorithm)</div><div class="q-hint">Track currentMax and globalMax. Reset current when negative. THE classic.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/maximum-subarray/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="10" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">10</div>
+      <div class="q-info"><div class="q-name">Remove Duplicates from Sorted Array (In-place)</div><div class="q-hint">Two-pointer: slow writes unique, fast scans. Return new length.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="11" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">11</div>
+      <div class="q-info"><div class="q-name">Merge Two Sorted Arrays</div><div class="q-hint">Two-pointer merge. Foundation for merge sort understanding.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="12" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">12</div>
+      <div class="q-info"><div class="q-name">Find Majority Element (> N/2 times)</div><div class="q-hint">Boyer-Moore Voting. O(n) time, O(1) space. Very elegant.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/majority-element/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="101" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">12b</div>
+      <div class="q-info"><div class="q-name">Majority Element II (> N/3 times)</div><div class="q-hint">Extended Boyer-Moore: track two candidates. Verify in second pass. At most 2 results.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/majority-element-ii/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="13" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">13</div>
+      <div class="q-info"><div class="q-name">Intersection of Two Arrays</div><div class="q-hint">HashSet approach. Handle duplicates carefully.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="14" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">14</div>
+      <div class="q-info"><div class="q-name">Check if Array is Sorted and Rotated</div><div class="q-hint">Count breaks (where arr[i] > arr[i+1]). At most 1 break allowed.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="15" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">15</div>
+      <div class="q-info"><div class="q-name">Maximum Product Subarray</div><div class="q-hint">Track both max and min product (negatives flip). Similar to Kadane's.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/maximum-product-subarray/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="16" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">16</div>
+      <div class="q-info"><div class="q-name">Subarray Sum Equals K</div><div class="q-hint">Prefix sum + HashMap. Count prefix sums that differ by K.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/subarray-sum-equals-k/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="17" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">17</div>
+      <div class="q-info"><div class="q-name">Leaders in an Array</div><div class="q-hint">Traverse from right, track max. Element is leader if > all right elements.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/leaders-in-an-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="18" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">18</div>
+      <div class="q-info"><div class="q-name">Next Permutation</div><div class="q-hint">Find rightmost ascending pair, swap, reverse suffix. Classic pattern.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/next-permutation/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="19" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">19</div>
+      <div class="q-info"><div class="q-name">Longest Consecutive Sequence</div><div class="q-hint">HashSet: for each num, if num-1 not in set → count streak forward.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-consecutive-sequence/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="20" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">20</div>
+      <div class="q-info"><div class="q-name">Find Union & Intersection of Two Sorted Arrays</div><div class="q-hint">Two-pointer merge approach. Handle duplicates across both arrays.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="102" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">21</div>
+      <div class="q-info"><div class="q-name">Best Time to Buy and Sell Stock</div><div class="q-hint">Track min price so far, compute profit at each day. One pass O(n). TCS classic!</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="103" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">22</div>
+      <div class="q-info"><div class="q-name">Rearrange Positive & Negative Numbers Alternately</div><div class="q-hint">Separate positives/negatives, interleave. Or two-pointer partition approach.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/rearrange-positive-and-negative-numbers-publish/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 2: STRINGS -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="strings">
+  <div class="section-header">
+    <div class="section-icon str">🔤</div>
+    <div>
+      <div class="section-title">Strings</div>
+      <div class="section-meta">2nd most asked topic. TCS loves char-frequency & palindrome problems.</div>
+    </div>
+    <div class="section-count" id="count-strings">0/19</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="21" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">23</div>
+      <div class="q-info"><div class="q-name">Check if String is Palindrome</div><div class="q-hint">Two-pointer from both ends. Handle case-insensitive + ignore non-alpha.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/valid-palindrome/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="22" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">24</div>
+      <div class="q-info"><div class="q-name">Reverse a String / Reverse Words in a String</div><div class="q-hint">Split by space, reverse array, join. Handle multiple spaces.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/reverse-words-in-a-string/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="23" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">25</div>
+      <div class="q-info"><div class="q-name">Check if Two Strings are Anagrams</div><div class="q-hint">Frequency count with array[26] or HashMap. Compare counts.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/valid-anagram/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="24" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">26</div>
+      <div class="q-info"><div class="q-name">Count Vowels and Consonants in a String</div><div class="q-hint">Simple traversal. Use a set for vowel check. Handle uppercase.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-count-vowels-consonant-digits-special-characters-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="25" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">27</div>
+      <div class="q-info"><div class="q-name">First Non-Repeating Character</div><div class="q-hint">HashMap for frequency, then second pass to find first with count=1.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="26" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">28</div>
+      <div class="q-info"><div class="q-name">Most Frequent Character in a String</div><div class="q-hint">Frequency array. Track max frequency and corresponding char.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/maximum-occurring-character-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="27" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">29</div>
+      <div class="q-info"><div class="q-name">Remove All Occurrences of a Character</div><div class="q-hint">Simple filter/replace. Know your language's string methods.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/remove-character-string-2/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="104" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">29b</div>
+      <div class="q-info"><div class="q-name">Remove Duplicates from a String</div><div class="q-hint">Use LinkedHashSet or boolean visited[26] to keep first occurrence only.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/remove-duplicates-from-a-given-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="28" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">30</div>
+      <div class="q-info"><div class="q-name">Check if String Contains Only Digits</div><div class="q-hint">Iterate and check ASCII range or use isdigit(). Edge: empty string.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-check-input-integer-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="29" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">31</div>
+      <div class="q-info"><div class="q-name">Longest Substring Without Repeating Characters</div><div class="q-hint">Sliding window + HashSet. Shrink left when duplicate found.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="30" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">32</div>
+      <div class="q-info"><div class="q-name">Count Words in a String</div><div class="q-hint">Split by spaces, filter empty strings, count. Handle multiple spaces.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/count-words-in-a-given-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="31" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">33</div>
+      <div class="q-info"><div class="q-name">Longest Palindromic Substring</div><div class="q-hint">Expand around center for each char (odd+even length). O(n²).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="32" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">34</div>
+      <div class="q-info"><div class="q-name">Group Anagrams</div><div class="q-hint">Sort each word as key in HashMap. Group by sorted key.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/group-anagrams/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="33" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">35</div>
+      <div class="q-info"><div class="q-name">Check if One String is a Rotation of Another</div><div class="q-hint">Concatenate s1+s1, then check if s2 is a substring. Clever O(n).</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="34" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">36</div>
+      <div class="q-info"><div class="q-name">Remove Vowels from a String</div><div class="q-hint">Filter out vowels. Simple but TCS asks variants frequently.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-remove-vowels-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="35" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">37</div>
+      <div class="q-info"><div class="q-name">String Compression (Run-Length Encoding)</div><div class="q-hint">Count consecutive chars: "aabbbcc" → "a2b3c2". Watch output format.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/string-compression/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="36" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">38</div>
+      <div class="q-info"><div class="q-name">Longest Common Prefix</div><div class="q-hint">Compare char by char across all strings. Stop at first mismatch.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="37" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">39</div>
+      <div class="q-info"><div class="q-name">Valid Parentheses (Balanced Brackets)</div><div class="q-hint">Use a stack. Push opening, pop on closing and match. Classic.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/valid-parentheses/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="38" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">40</div>
+      <div class="q-info"><div class="q-name">Roman to Integer / Integer to Roman</div><div class="q-hint">Map roman chars to values. If smaller before larger → subtract.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/roman-to-integer/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 3: NUMBER THEORY / MATH -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="numbers">
+  <div class="section-header">
+    <div class="section-icon num">🔢</div>
+    <div>
+      <div class="section-title">Number Theory & Math</div>
+      <div class="section-meta">TCS NQT staple. These are the most predictable questions. FREE marks. TCS mixes coding + aptitude logic here.</div>
+    </div>
+    <div class="section-count" id="count-numbers">0/17</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="39" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">41</div>
+      <div class="q-info"><div class="q-name">Check if Number is Prime</div><div class="q-hint">Check divisibility up to √n only. Handle n=0,1 edge cases.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/prime-numbers/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="40" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">42</div>
+      <div class="q-info"><div class="q-name">Reverse a Number / Check Palindrome Number</div><div class="q-hint">Build reversed number digit by digit. Compare with original.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/palindrome-number/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="41" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">43</div>
+      <div class="q-info"><div class="q-name">Fibonacci Series (Iterative + Recursive + DP)</div><div class="q-hint">Know all 3 approaches. Iterative is O(n) time O(1) space. Best for TCS.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/fibonacci-number/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="42" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">44</div>
+      <div class="q-info"><div class="q-name">Factorial of a Number (Iterative + Recursive)</div><div class="q-hint">Simple loop. Watch overflow for large N — use long/BigInteger.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-for-factorial-of-a-number/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="43" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">45</div>
+      <div class="q-info"><div class="q-name">GCD and LCM of Two Numbers</div><div class="q-hint">Euclidean algorithm: gcd(a,b) = gcd(b, a%b). LCM = (a*b)/gcd.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/gcd-two-array-numbers/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="44" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">46</div>
+      <div class="q-info"><div class="q-name">Armstrong Number Check</div><div class="q-hint">Sum of digits^(number of digits) == number itself. 153 → 1³+5³+3³=153.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-for-armstrong-numbers/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="45" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">47</div>
+      <div class="q-info"><div class="q-name">Strong Number Check</div><div class="q-hint">Sum of factorial of digits == number. 145 → 1!+4!+5!=145.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/strong-number/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="46" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">48</div>
+      <div class="q-info"><div class="q-name">Perfect Number Check</div><div class="q-hint">Sum of proper divisors == number. 6 → 1+2+3=6.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/perfect-number/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="47" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">49</div>
+      <div class="q-info"><div class="q-name">Sum of Digits / Digital Root / Number of Digits</div><div class="q-hint">Extract digits with %10 and /10. Digital root: keep summing till single digit. Count digits with log10.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/finding-sum-of-digits-of-a-number-until-sum-becomes-single-digit/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="48" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">50</div>
+      <div class="q-info"><div class="q-name">Decimal to Binary / Binary to Decimal Conversion</div><div class="q-hint">Use repeated /2 and %2 for D→B. Positional multiplication for B→D.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-decimal-binary-conversion/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="49" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">51</div>
+      <div class="q-info"><div class="q-name">Sieve of Eratosthenes (All Primes up to N)</div><div class="q-hint">Boolean array, mark multiples of each prime. O(n log log n).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/count-primes/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="50" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">52</div>
+      <div class="q-info"><div class="q-name">Power of Two / Power of Three Check</div><div class="q-hint">Bit manipulation: n & (n-1) == 0 for power of 2. Or keep dividing.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/power-of-two/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="51" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">53</div>
+      <div class="q-info"><div class="q-name">Count Trailing Zeros in Factorial</div><div class="q-hint">Count factors of 5 in N!: N/5 + N/25 + N/125 + ...</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/factorial-trailing-zeroes/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="52" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">54</div>
+      <div class="q-info"><div class="q-name">Modular Exponentiation (Power with Modulo)</div><div class="q-hint">Binary exponentiation: square and multiply. Needed for large inputs.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/modular-exponentiation-power-in-modular-arithmetic/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="53" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">55</div>
+      <div class="q-info"><div class="q-name">Neon Number / Spy Number / Automorphic Number</div><div class="q-hint">TCS loves these number-type checks. Quick implementations.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/automorphic-number/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="105" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">56</div>
+      <div class="q-info"><div class="q-name">Count Factors / Divisors of a Number</div><div class="q-hint">Loop from 1 to √n, if n%i==0, count both i and n/i. O(√n).</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/count-divisors-n-on13/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="106" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">57</div>
+      <div class="q-info"><div class="q-name">Count Number of Digits in a Number</div><div class="q-hint">Use log10(n)+1 or repeated /10 loop. Handle n=0 edge case.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/program-count-digits-integer-3-different-methods/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 4: SORTING & SEARCHING -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="sorting">
+  <div class="section-header">
+    <div class="section-icon sort">🔍</div>
+    <div>
+      <div class="section-title">Sorting & Searching</div>
+      <div class="section-meta">Binary search variants are key. Know when to sort first.</div>
+    </div>
+    <div class="section-count" id="count-sorting">0/10</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="54" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">58</div>
+      <div class="q-info"><div class="q-name">Binary Search (Iterative + Recursive)</div><div class="q-hint">left=0, right=n-1, mid=(left+right)/2. Know both implementations cold.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/binary-search/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="55" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">59</div>
+      <div class="q-info"><div class="q-name">Search in Rotated Sorted Array</div><div class="q-hint">Modified binary search: check which half is sorted, then decide.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="56" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">60</div>
+      <div class="q-info"><div class="q-name">Find First and Last Position of Element</div><div class="q-hint">Two binary searches: one for leftmost, one for rightmost occurrence.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="57" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">61</div>
+      <div class="q-info"><div class="q-name">Bubble Sort Implementation</div><div class="q-hint">Know the algorithm, time complexity O(n²). TCS asks to implement sorts.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/bubble-sort/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="58" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">62</div>
+      <div class="q-info"><div class="q-name">Selection Sort Implementation</div><div class="q-hint">Find min in unsorted part, swap to front. O(n²) but easy to code.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/selection-sort/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="59" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">63</div>
+      <div class="q-info"><div class="q-name">Merge Sort Implementation</div><div class="q-hint">Divide and conquer. O(n log n). Understand merge step thoroughly.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/merge-sort/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="60" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">64</div>
+      <div class="q-info"><div class="q-name">Find Peak Element</div><div class="q-hint">Binary search: if mid > mid+1, peak is on left side (including mid).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/find-peak-element/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="61" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">65</div>
+      <div class="q-info"><div class="q-name">Find Square Root (Integer) using Binary Search</div><div class="q-hint">Binary search between 1 and n. Check mid*mid <= n < (mid+1)*(mid+1).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/sqrtx/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="62" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">66</div>
+      <div class="q-info"><div class="q-name">Find Floor and Ceil of a Number in Sorted Array</div><div class="q-hint">Modified binary search. Floor: largest ≤ target. Ceil: smallest ≥ target.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/find-floor-ceil-unsorted-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="63" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">67</div>
+      <div class="q-info"><div class="q-name">Kth Smallest/Largest Element</div><div class="q-hint">Use QuickSelect O(n) avg or sort+index O(n log n). Know both.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 5: HASHMAP & FREQUENCY -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="hashmap">
+  <div class="section-header">
+    <div class="section-icon hash">🗂️</div>
+    <div>
+      <div class="section-title">HashMap & Frequency Counting</div>
+      <div class="section-meta">The secret weapon. "If you master hashing → Prime becomes easy." THE difference maker.</div>
+    </div>
+    <div class="section-count" id="count-hashmap">0/9</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="64" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">68</div>
+      <div class="q-info"><div class="q-name">Frequency of Each Element in Array</div><div class="q-hint">HashMap: key=element, value=count. Print all. Foundation skill.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="65" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">69</div>
+      <div class="q-info"><div class="q-name">Find All Duplicates in an Array</div><div class="q-hint">HashMap count > 1. Or mark visited by negating index (O(1) space trick).</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/find-all-duplicates-in-an-array/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="66" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">70</div>
+      <div class="q-info"><div class="q-name">Check if Two Arrays are Equal</div><div class="q-hint">Compare frequency maps. Handle duplicates properly.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/check-if-two-arrays-are-equal-or-not/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="67" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">71</div>
+      <div class="q-info"><div class="q-name">Top K Frequent Elements</div><div class="q-hint">HashMap for frequency → sort by freq → return top K. Or bucket sort.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="68" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">72</div>
+      <div class="q-info"><div class="q-name">Count Pairs with Given Sum</div><div class="q-hint">For each element, check if (sum - element) exists in map. Handle duplicates.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/count-pairs-with-given-sum/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="69" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">73</div>
+      <div class="q-info"><div class="q-name">First Element to Occur K Times</div><div class="q-hint">HashMap: increment count on each element. Return first with count == K.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/first-element-occurring-k-times-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="70" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">74</div>
+      <div class="q-info"><div class="q-name">Longest Subarray with Sum K (Positives + Negatives)</div><div class="q-hint">Prefix sum + HashMap. Store first occurrence of each prefix sum.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/longest-sub-array-sum-k/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="71" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">75</div>
+      <div class="q-info"><div class="q-name">Contains Duplicate II (Within K Distance)</div><div class="q-hint">Sliding window with HashSet of size K. Or HashMap storing last index.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/contains-duplicate-ii/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="107" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">76</div>
+      <div class="q-info"><div class="q-name">Count Distinct Elements in Array</div><div class="q-hint">Insert all elements into HashSet. Set size = distinct count. O(n).</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/count-distinct-elements-in-an-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 6: SLIDING WINDOW & TWO POINTER -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="window">
+  <div class="section-header">
+    <div class="section-icon sub">🪟</div>
+    <div>
+      <div class="section-title">Sliding Window & Two Pointer</div>
+      <div class="section-meta">Pattern that appears in medium-hard TCS questions. Learn the template.</div>
+    </div>
+    <div class="section-count" id="count-window">0/8</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="72" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">77</div>
+      <div class="q-info"><div class="q-name">Maximum Sum Subarray of Size K</div><div class="q-hint">Fixed-size sliding window: add right, subtract left. O(n).</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/find-maximum-minimum-sum-subarray-size-k/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="73" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">78</div>
+      <div class="q-info"><div class="q-name">Smallest Subarray with Sum ≥ S</div><div class="q-hint">Variable-size window: expand right, shrink left when sum ≥ S. Track min.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="74" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">79</div>
+      <div class="q-info"><div class="q-name">Count Subarrays with Given XOR / Sum</div><div class="q-hint">Prefix sum/XOR + HashMap for counting. Important pattern.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/count-number-subarrays-given-xor/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="75" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">80</div>
+      <div class="q-info"><div class="q-name">Container With Most Water</div><div class="q-hint">Two-pointer from both ends. Move shorter pointer inward. O(n).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/container-with-most-water/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="76" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">81</div>
+      <div class="q-info"><div class="q-name">3Sum (Find All Triplets with Sum = 0)</div><div class="q-hint">Sort → fix one → two-pointer for remaining. Skip duplicates.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/3sum/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="77" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">82</div>
+      <div class="q-info"><div class="q-name">Move Negative Numbers to One Side</div><div class="q-hint">Two-pointer partition. Similar to Dutch flag but simpler.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/move-negative-numbers-beginning-positive-end-constant-extra-space/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="78" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">83</div>
+      <div class="q-info"><div class="q-name">Trapping Rain Water</div><div class="q-hint">Two-pointer or prefix max arrays. Calculate water at each index. Classic.</div></div>
+      <div class="q-tags"><span class="tag hard">Hard</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/trapping-rain-water/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="108" data-diff="hard" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">84</div>
+      <div class="q-info"><div class="q-name">Minimum Window Substring</div><div class="q-hint">Variable window + frequency map. Expand right to cover all chars, shrink left to minimize. O(n).</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag hard">Hard</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 7: MATRIX -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="matrix">
+  <div class="section-header">
+    <div class="section-icon mat">🔲</div>
+    <div>
+      <div class="section-title">Matrix Operations</div>
+      <div class="section-meta">TCS asks matrix questions in ~30% of slots. Know these patterns.</div>
+    </div>
+    <div class="section-count" id="count-matrix">0/8</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="79" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">85</div>
+      <div class="q-info"><div class="q-name">Transpose of a Matrix</div><div class="q-hint">Swap matrix[i][j] with matrix[j][i]. For in-place: only upper triangle.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/transpose-of-a-matrix/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="80" data-diff="medium" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">86</div>
+      <div class="q-info"><div class="q-name">Spiral Order Matrix Traversal</div><div class="q-hint">4 pointers: top, bottom, left, right. Traverse boundaries, shrink inward.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/spiral-matrix/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="81" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">87</div>
+      <div class="q-info"><div class="q-name">Rotate Matrix by 90 Degrees</div><div class="q-hint">Transpose + reverse each row. In-place O(1) space.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/rotate-image/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="82" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">88</div>
+      <div class="q-info"><div class="q-name">Set Matrix Zeroes</div><div class="q-hint">Use first row/col as markers. Two-pass approach. O(1) space.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/set-matrix-zeroes/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="83" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">89</div>
+      <div class="q-info"><div class="q-name">Matrix Multiplication</div><div class="q-hint">Triple nested loop: C[i][j] += A[i][k] * B[k][j]. Know dimensions rule.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/c-program-multiply-two-matrices/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="84" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">90</div>
+      <div class="q-info"><div class="q-name">Search in Sorted 2D Matrix</div><div class="q-hint">Start top-right. If target < current go left, else go down. O(m+n).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/search-a-2d-matrix-ii/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="109" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">91</div>
+      <div class="q-info"><div class="q-name">Diagonal Traversal of Matrix</div><div class="q-hint">Primary diagonal: i==j. Secondary: i+j==n-1. Traverse both diagonals separately.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/zigzag-or-diagonal-traversal-of-matrix/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="110" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">92</div>
+      <div class="q-info"><div class="q-name">Row-wise and Column-wise Sum of Matrix</div><div class="q-hint">Nested loops: sum each row and each column separately. TCS basic matrix question.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/row-wise-column-wise-sums-2d-array/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 8: TREES (NEW - For Prime) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="trees">
+  <div class="section-header">
+    <div class="section-icon tree">🌳</div>
+    <div>
+      <div class="section-title">Trees (For Prime)</div>
+      <div class="section-meta">Prime-level MUST. Binary Trees & BSTs appear in advanced coding rounds. "No trees = No Prime."</div>
+    </div>
+    <div class="section-count" id="count-trees">0/10</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="t1" data-diff="easy" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">93</div>
+      <div class="q-info"><div class="q-name">Inorder, Preorder, Postorder Traversal (Recursive + Iterative)</div><div class="q-hint">Know all 3 traversals cold. Recursive is easy, iterative uses stack. Foundation of trees.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/binary-tree-inorder-traversal/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t2" data-diff="easy" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">94</div>
+      <div class="q-info"><div class="q-name">Level Order Traversal (BFS on Tree)</div><div class="q-hint">Use a queue. Process level by level. Foundation for many tree problems.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t3" data-diff="easy" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">95</div>
+      <div class="q-info"><div class="q-name">Height / Maximum Depth of Binary Tree</div><div class="q-hint">Recursive: max(left, right) + 1. Base: null → 0. Classic DFS.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t4" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">96</div>
+      <div class="q-info"><div class="q-name">Check if Binary Tree is Balanced</div><div class="q-hint">Height difference of left & right subtrees ≤ 1 at every node. O(n) with combined height check.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/balanced-binary-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t5" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">97</div>
+      <div class="q-info"><div class="q-name">Diameter of Binary Tree</div><div class="q-hint">Longest path between any two nodes. At each node: leftHeight + rightHeight. Track global max.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/diameter-of-binary-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t6" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">98</div>
+      <div class="q-info"><div class="q-name">Mirror / Symmetric Tree Check</div><div class="q-hint">Recursive: left.left mirrors right.right and vice versa. Clean base cases.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/symmetric-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t7" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">99</div>
+      <div class="q-info"><div class="q-name">Lowest Common Ancestor (LCA) of Binary Tree</div><div class="q-hint">If both nodes found in left/right → current node is LCA. Classic recursion.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t8" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">100</div>
+      <div class="q-info"><div class="q-name">Validate Binary Search Tree (BST)</div><div class="q-hint">Inorder traversal must be sorted. Or pass min/max bounds recursively. Important BST concept.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t9" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">101</div>
+      <div class="q-info"><div class="q-name">Search & Insert in BST</div><div class="q-hint">Search: compare and go left or right. Insert: find null position. Know both recursive & iterative.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/search-in-a-binary-search-tree/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="t10" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">102</div>
+      <div class="q-info"><div class="q-name">Left View / Right View / Top View of Binary Tree</div><div class="q-hint">Level order + track first/last node per level. Or recursive with depth tracking.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/print-left-view-binary-tree/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 9: GRAPHS (NEW - For Prime) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="graphs">
+  <div class="section-header">
+    <div class="section-icon graph">🕸️</div>
+    <div>
+      <div class="section-title">Graphs (For Prime)</div>
+      <div class="section-meta">THE Prime differentiator. BFS, DFS, shortest paths — if you know these, Prime is yours.</div>
+    </div>
+    <div class="section-count" id="count-graphs">0/8</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="g1" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">103</div>
+      <div class="q-info"><div class="q-name">BFS (Breadth-First Search) on Graph</div><div class="q-hint">Queue-based traversal. Use visited array. Level-by-level exploration. Foundation of graph problems.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g2" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">104</div>
+      <div class="q-info"><div class="q-name">DFS (Depth-First Search) on Graph</div><div class="q-hint">Stack or recursion. Mark visited. Explore as deep as possible before backtracking.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g3" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">105</div>
+      <div class="q-info"><div class="q-name">Detect Cycle in Undirected Graph</div><div class="q-hint">BFS/DFS + parent tracking. If visited neighbor ≠ parent → cycle exists.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/detect-cycle-undirected-graph/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g4" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">106</div>
+      <div class="q-info"><div class="q-name">Detect Cycle in Directed Graph</div><div class="q-hint">DFS with recursion stack (3-color: white/gray/black). Gray→Gray = cycle.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/detect-cycle-in-a-graph/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g5" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">107</div>
+      <div class="q-info"><div class="q-name">Number of Islands (Connected Components)</div><div class="q-hint">Grid DFS/BFS: for each unvisited '1', start traversal and mark all connected. Count components.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/number-of-islands/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="g6" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">108</div>
+      <div class="q-info"><div class="q-name">Shortest Path in Unweighted Graph (BFS)</div><div class="q-hint">BFS naturally finds shortest path in unweighted graphs. Track distance array.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/shortest-path-unweighted-graph/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g7" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">109</div>
+      <div class="q-info"><div class="q-name">Topological Sort (Kahn's BFS / DFS)</div><div class="q-hint">DAG ordering: process nodes with 0 in-degree first. Or DFS with post-order stack.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/topological-sorting/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="g8" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">110</div>
+      <div class="q-info"><div class="q-name">Dijkstra's Shortest Path (Weighted Graph)</div><div class="q-hint">Min-heap + greedy relaxation. dist[src]=0, relax neighbors. O((V+E) log V).</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 10: DYNAMIC PROGRAMMING (For Prime) -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="dp">
+  <div class="section-header">
+    <div class="section-icon dp">💎</div>
+    <div>
+      <div class="section-title">Dynamic Programming (For Prime)</div>
+      <div class="section-meta">Prime-level differentiator. Learn these 12 patterns and you're set. "DP done right = Prime guaranteed."</div>
+    </div>
+    <div class="section-count" id="count-dp">0/12</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="85" data-diff="easy" data-must="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">111</div>
+      <div class="q-info"><div class="q-name">Climbing Stairs (Fibonacci DP)</div><div class="q-hint">dp[i] = dp[i-1] + dp[i-2]. Base: dp[0]=1, dp[1]=1. Classic intro to DP.</div></div>
+      <div class="q-tags"><span class="tag must">Must-Do</span><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/climbing-stairs/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="86" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">112</div>
+      <div class="q-info"><div class="q-name">0/1 Knapsack Problem</div><div class="q-hint">2D DP: dp[i][w] = max(exclude, include). Can optimize to 1D.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="87" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">113</div>
+      <div class="q-info"><div class="q-name">Longest Common Subsequence (LCS)</div><div class="q-hint">2D table: if chars match dp[i][j]=dp[i-1][j-1]+1, else max of top/left.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="88" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">114</div>
+      <div class="q-info"><div class="q-name">Coin Change (Min Coins)</div><div class="q-hint">1D DP: dp[amount] = min coins. For each coin, dp[j] = min(dp[j], dp[j-coin]+1).</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/coin-change/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="89" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">115</div>
+      <div class="q-info"><div class="q-name">Longest Increasing Subsequence (LIS)</div><div class="q-hint">O(n²) DP or O(n log n) with binary search. Know both.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="90" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">116</div>
+      <div class="q-info"><div class="q-name">House Robber (Max Non-Adjacent Sum)</div><div class="q-hint">dp[i] = max(dp[i-1], dp[i-2]+nums[i]). Simple 1D DP.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/house-robber/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="91" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">117</div>
+      <div class="q-info"><div class="q-name">Min Path Sum in Grid</div><div class="q-hint">dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1]). Standard 2D DP.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/minimum-path-sum/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="92" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">118</div>
+      <div class="q-info"><div class="q-name">Edit Distance</div><div class="q-hint">2D DP on two strings. 3 operations: insert, delete, replace. Classic.</div></div>
+      <div class="q-tags"><span class="tag hard">Hard</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/edit-distance/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="dp1" data-diff="medium" data-must="true" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">119</div>
+      <div class="q-info"><div class="q-name">Subset Sum Problem</div><div class="q-hint">dp[i][j] = can we form sum j using first i items? Boolean 2D DP. Key knapsack variant.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag must">Must-Do</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/subset-sum-problem-dp-25/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="dp2" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">120</div>
+      <div class="q-info"><div class="q-name">Unique Paths in Grid</div><div class="q-hint">dp[i][j] = dp[i-1][j] + dp[i][j-1]. Count ways to reach bottom-right from top-left.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/unique-paths/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="dp3" data-diff="hard" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">121</div>
+      <div class="q-info"><div class="q-name">Palindrome Partitioning (Min Cuts)</div><div class="q-hint">dp[i] = min cuts for s[0..i] to be all palindromes. Pre-compute palindrome check table.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag hard">Hard</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/palindrome-partitioning-ii/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="dp4" data-diff="medium" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">122</div>
+      <div class="q-info"><div class="q-name">Word Break Problem</div><div class="q-hint">dp[i] = can s[0..i] be segmented? For each j<i, check dp[j] && s[j..i] in dict.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/word-break/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 11: GREEDY -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="greedy">
+  <div class="section-header">
+    <div class="section-icon greedy">🎯</div>
+    <div>
+      <div class="section-title">Greedy</div>
+      <div class="section-meta">Greedy = solve locally optimal. Quick wins in TCS NQT.</div>
+    </div>
+    <div class="section-count" id="count-greedy">0/4</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="93" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">123</div>
+      <div class="q-info"><div class="q-name">Activity Selection Problem</div><div class="q-hint">Sort by end time. Pick first, skip overlapping, pick next non-overlapping.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="94" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">124</div>
+      <div class="q-info"><div class="q-name">Fractional Knapsack</div><div class="q-hint">Sort by value/weight ratio. Take as much as possible of most valuable.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/fractional-knapsack-problem/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="98" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">125</div>
+      <div class="q-info"><div class="q-name">Minimum Coins for Change (Greedy Approach)</div><div class="q-hint">For standard denominations, greedy works. Pick largest coin first.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/greedy-algorithm-to-find-minimum-number-of-coins/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="100" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">126</div>
+      <div class="q-info"><div class="q-name">Pattern Printing (Number/Star Triangles)</div><div class="q-hint">Nested loops: outer for rows, inner for spaces + stars. 5-6 patterns.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/programs-printing-pyramid-patterns-java/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 12: RECURSION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="recursion">
+  <div class="section-header">
+    <div class="section-icon rec">🔁</div>
+    <div>
+      <div class="section-title">Recursion & Backtracking</div>
+      <div class="section-meta">Think in subproblems. TCS asks basic recursion. Know factorial, fibonacci, reverse, sum of digits recursively.</div>
+    </div>
+    <div class="section-count" id="count-recursion">0/6</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="95" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">127</div>
+      <div class="q-info"><div class="q-name">Generate All Subsets (Power Set)</div><div class="q-hint">Recursive: include/exclude each element. Or bitmask iteration.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/subsets/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="96" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">128</div>
+      <div class="q-info"><div class="q-name">Generate All Permutations of a String/Array</div><div class="q-hint">Recursive swap at each position. Backtrack after recursive call.</div></div>
+      <div class="q-tags"><span class="tag medium">Medium</span></div>
+      <a class="q-link" href="https://leetcode.com/problems/permutations/" target="_blank" onclick="event.stopPropagation()">LeetCode ↗</a>
+    </div>
+    <div class="q-row" data-id="97" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">129</div>
+      <div class="q-info"><div class="q-name">Tower of Hanoi</div><div class="q-hint">Move n-1 to aux, move nth to dest, move n-1 to dest. Classic recursion.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/c-program-for-tower-of-hanoi/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="99" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">130</div>
+      <div class="q-info"><div class="q-name">Print All Subsequences of a String</div><div class="q-hint">Include/exclude recursion. 2^n subsequences total.</div></div>
+      <div class="q-tags"><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/print-subsequences-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="111" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">131</div>
+      <div class="q-info"><div class="q-name">Sum of Digits using Recursion</div><div class="q-hint">Base: n==0 return 0. Recursive: n%10 + sumOfDigits(n/10). Pure recursion practice.</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/sum-digit-number-using-recursion/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="112" data-diff="easy" data-new="true" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">132</div>
+      <div class="q-info"><div class="q-name">Reverse String / Array using Recursion</div><div class="q-hint">Swap first and last, recurse on inner. Base: start >= end. O(n).</div></div>
+      <div class="q-tags"><span class="tag new">New</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/write-a-program-to-reverse-an-array-or-string/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SECTION 13: PATTERN / SIMULATION -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="topic-section" data-section="simulation">
+  <div class="section-header">
+    <div class="section-icon pat">🧩</div>
+    <div>
+      <div class="section-title">Pattern / Simulation (TCS Favorite)</div>
+      <div class="section-meta">Clock problems, game logic, matrix transforms. TCS loves these "think and implement" types.</div>
+    </div>
+    <div class="section-count" id="count-simulation">0/2</div>
+  </div>
+  <div class="q-list">
+    <div class="q-row" data-id="113" data-diff="easy" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">133</div>
+      <div class="q-info"><div class="q-name">Clock Angle Problem</div><div class="q-hint">Hour hand moves 0.5°/min, minute hand moves 6°/min. Find abs difference.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag easy">Easy</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/calculate-angle-hour-hand-minute-hand/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+    <div class="q-row" data-id="114" data-diff="medium" onclick="toggleQ(this)">
+      <div class="q-check">✓</div><div class="q-number">134</div>
+      <div class="q-info"><div class="q-name">Game Simulation / Matrix Transformation Logic</div><div class="q-hint">Read problem carefully, simulate step-by-step. No trick — just clean implementation.</div></div>
+      <div class="q-tags"><span class="tag tcs">TCS Asked</span><span class="tag medium">Medium</span></div>
+      <a class="q-link gfg" href="https://www.geeksforgeeks.org/game-of-life/" target="_blank" onclick="event.stopPropagation()">GFG ↗</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- end content -->
+
+<!-- ─── FOOTER ─── -->
+<div class="page-footer">
+  <div class="footer-quote">"136 problems solved properly > 500 problems glanced at."</div>
+  <div class="footer-text">
+    Solve every question yourself. Time yourself. Handle edge cases.<br>
+    Do this list honestly and you WILL crack TCS NQT Digital/Prime coding section. 🚀<br>
+    <span style="color:var(--accent-pink);font-weight:600;">🆕 Trees, Graphs & expanded DP added — PRIME-ready coverage.</span>
+  </div>
+</div>
+
+<!-- ─── RESET ─── -->
+<button class="reset-btn" onclick="resetProgress()">🗑️ Reset All Progress</button>
+
+<script>
+  const STORAGE_KEY = 'tcs-nqt-coding-2026';
+
+  // Load saved state
+  function loadState() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  // Toggle question done state
+  function toggleQ(row) {
+    const id = row.dataset.id;
+    const state = loadState();
+    if (state[id]) {
+      delete state[id];
+      row.classList.remove('done');
+    } else {
+      state[id] = true;
+      row.classList.add('done');
+    }
+    saveState(state);
+    updateStats();
+  }
+
+  // Restore saved checkmarks
+  function restoreState() {
+    const state = loadState();
+    document.querySelectorAll('.q-row').forEach(row => {
+      if (state[row.dataset.id]) {
+        row.classList.add('done');
+      }
+    });
+    updateStats();
+  }
+
+  // Update stats bar
+  function updateStats() {
+    const total = document.querySelectorAll('.q-row').length;
+    const done = document.querySelectorAll('.q-row.done').length;
+    const remain = total - done;
+    const pct = Math.round((done / total) * 100);
+
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('doneCount').textContent = done;
+    document.getElementById('remainCount').textContent = remain;
+    document.getElementById('pctDone').textContent = pct + '%';
+    document.getElementById('progressFill').style.width = pct + '%';
+
+    // Update section counts
+    document.querySelectorAll('.topic-section').forEach(section => {
+      const sectionName = section.dataset.section;
+      const sTotal = section.querySelectorAll('.q-row').length;
+      const sDone = section.querySelectorAll('.q-row.done').length;
+      const counter = document.getElementById('count-' + sectionName);
+      if (counter) counter.textContent = sDone + '/' + sTotal;
+    });
+  }
+
+  // Filter questions
+  function filterQuestions(filter) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    document.querySelectorAll('.q-row').forEach(row => {
+      let show = true;
+      switch(filter) {
+        case 'pending': show = !row.classList.contains('done'); break;
+        case 'done': show = row.classList.contains('done'); break;
+        case 'must': show = row.dataset.must === 'true'; break;
+        case 'easy': show = row.dataset.diff === 'easy'; break;
+        case 'medium': show = row.dataset.diff === 'medium'; break;
+        case 'hard': show = row.dataset.diff === 'hard'; break;
+        case 'new': show = row.dataset.new === 'true'; break;
+      }
+      row.style.display = show ? 'flex' : 'none';
+    });
+
+    // Show/hide sections based on visible questions
+    document.querySelectorAll('.topic-section').forEach(section => {
+      const hasVisible = Array.from(section.querySelectorAll('.q-row')).some(r => r.style.display !== 'none');
+      section.style.display = hasVisible ? 'block' : 'none';
+    });
+  }
+
+  // Reset
+  function resetProgress() {
+    if (confirm('Are you sure you want to reset ALL progress? This cannot be undone.')) {
+      localStorage.removeItem(STORAGE_KEY);
+      document.querySelectorAll('.q-row').forEach(row => row.classList.remove('done'));
+      updateStats();
+    }
+  }
+
+  // Init
+  restoreState();
+</script>
+</body>
+</html>
